@@ -122,7 +122,8 @@ def move(coordinate_x, coordinate_y, tmp_x, tmp_y, tmp_f, x_p, y_p):
     l_turn = not l_turn
 
 
-def classic_begin():
+# Постройка шахматного поля
+def chess_board_build():
     global swx
     global swy
     # Обозначение координатных обозначений
@@ -171,6 +172,10 @@ def classic_begin():
             swx += 180
         swy += 180
         swx = 40
+
+def classic_begin():
+    global swx
+    global swy
     # Начальная позиция: чёрные пешки
     for i in range(8):
         create_figure(i, 6, "Pawn", "Dark")
