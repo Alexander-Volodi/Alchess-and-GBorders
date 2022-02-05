@@ -43,15 +43,10 @@ sc.blit(text1, (350, 170))
 f1 = pg.font.SysFont('aharoni', 37)
 text1 = f1.render('Chess-960', True,
                   (0, 0, 0))
-sc.blit(text1, (330, 270))
+sc.blit(text1, (330, 280))
 text1 = f1.render('Battle chess', True,
                   (0, 0, 0))
-sc.blit(text1, (520, 270))
-f1 = pg.font.SysFont('aharoni', 30)
-text1 = f1.render('in dev.', True,
-                  (0, 0, 0))
-sc.blit(text1, (370, 295))
-sc.blit(text1, (560, 295))
+sc.blit(text1, (520, 280))
 # Обновление экрана
 pg.display.update()
 exit_menu = False
@@ -63,14 +58,30 @@ while not exit_menu:
         if i.type == pg.QUIT:
             sys.exit()
         if i.type == pg.MOUSEBUTTONDOWN:
-            if (i.pos[0] >= 310) and (i.pos[0] <= 690) and (i.pos[1] >= 120) and (i.pos[1] <= 200):
+            if (i.pos[0] >= 310) and (i.pos[0] <= 690) and (i.pos[1] >= 150) and (i.pos[1] <= 230):
                 exit_menu = True
                 game_button = 'Classic chess'
+            if (i.pos[0] >= 310) and (i.pos[0] <= 490) and (i.pos[1] >= 250) and (i.pos[1] <= 330):
+                exit_menu = True
+                game_button = 'Chess-960'
+            if (i.pos[0] >= 510) and (i.pos[0] <= 690) and (i.pos[1] >= 250) and (i.pos[1] <= 330):
+                exit_menu = True
+                game_button = 'Battle_chess'
+        clock.tick(20)
+
 # Подготовка к игре
 f1 = pg.font.Font(None, 60)
 sc = pg.display.set_mode((760, 760))
 sc.fill((190, 190, 190))
-# Если выбрали классические шахматы
+# Если выбраны классические шахматы
 if game_button == 'Classic chess':
+    chess.chess_board_build()
     chess.classic_begin()
-    chess.rules()
+# Если выбраны шахматы фишера
+elif game_button == 'Chess-960':
+    chess.chess_board_build()
+    chess.fisherandom_begin()
+elif game_button == 'Battle_chess':
+    chess.battle_chess_begin()
+# Установка шахматных правил
+chess.rules()
